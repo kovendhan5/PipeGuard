@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PipeGuard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body { font-family: Arial; margin: 20px; }
+    canvas { max-width: 600px; }
+  </style>
+</head>
+<body>
+  <h1>PipeGuard: Pipeline Health</h1>
+  <h2>Recent Runs</h2>
+  <ul>
+    {% for run in runs %}
+      <li>Run {{ run.id }}: {{ run.status if run.status else "unknown" }} ({{ run.duration }}s)</li>
+    {% endfor %}
+  </ul>
+  <h2>Anomalies</h2>
+  <ul>
+    {% for anomaly in anomalies %}
+      <li>{{ anomaly.issue }} - Fix: {{ anomaly.fix }}</li>
+    {% endfor %}
+  </ul>
+  <canvas id="durationChart"></canvas>
+  <script>
+    new Chart(document.getElementById("durationChart"), {
+      type: "line",
+      data: {
+        labels: [{% for run in runs %}"Run {{ run.id }}",{% endfor %}],
+        datasets: [{
+          label: "Build Duration (s)",
+          data: [{% for run in runs %}{{ run.duration }},{% endfor %}],
+          borderColor: "blue",
+          fill: false
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
