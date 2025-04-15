@@ -1,0 +1,16 @@
+# Cloud Scheduler Configuration for PipeGuard
+# This YAML represents the Cloud Scheduler job definition
+# You can use this to set up the job in Google Cloud Console or via gcloud CLI
+
+job:
+  name: projects/YOUR_PROJECT_ID/locations/YOUR_REGION/jobs/monitor-pipelines-hourly
+  schedule: "0 * * * *"  # Run hourly
+  timeZone: "UTC"
+  target:
+    httpTarget:
+      uri: "https://YOUR_REGION-YOUR_PROJECT_ID.cloudfunctions.net/monitor_pipeline"
+      httpMethod: GET
+      headers:
+        User-Agent: "Cloud-Scheduler"
+      oidcToken:
+        serviceAccountEmail: "YOUR_SERVICE_ACCOUNT@YOUR_PROJECT_ID.iam.gserviceaccount.com"
