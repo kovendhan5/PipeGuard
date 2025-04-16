@@ -15,8 +15,9 @@ def monitor_pipeline(request):
         if not GITHUB_TOKEN:
             return "Error: GitHub token not found in environment variables"
         
-        # Remove any whitespace or invisible characters that might cause API issues
-        GITHUB_TOKEN = GITHUB_TOKEN.strip()
+        # Convert to string and remove any whitespace or invisible characters that might cause API issues
+        GITHUB_TOKEN = str(GITHUB_TOKEN).strip()
+        print(f"Token found, first 5 chars: {GITHUB_TOKEN[:5]}...")
         
         GITHUB_USER = os.environ.get("GITHUB_USER", "kovendhan5")
         GITHUB_REPO = os.environ.get("GITHUB_REPO", "PipeGuard")
