@@ -1,4 +1,36 @@
-# PipeGuard
+# PipeGuard - GitHub Actions Pipeline Monitor
+
+PipeGuard is a monitoring system for GitHub Actions pipelines that detects anomalies and provides suggestions for fixes. The project demonstrates DevOps skills by integrating multiple Google Cloud services with a GitHub workflow.
+
+## Features
+
+- Real-time monitoring of GitHub Actions pipeline runs
+- Automated detection of anomalous pipeline behavior:
+  - Performance issues (runs taking longer than usual)
+  - Failed pipeline runs
+- Suggested fixes for identified problems
+- Interactive dashboard for visualizing pipeline health
+- Hourly automatic monitoring via Cloud Scheduler
+
+## Architecture
+
+- **GitHub Actions**: CI/CD pipeline providing the source data
+- **Google Cloud Function**: Collects GitHub Actions data and detects anomalies
+- **Google Firestore**: NoSQL database storing pipeline runs and detected anomalies
+- **Google App Engine**: Hosts the Flask dashboard website
+- **Google Cloud Scheduler**: Triggers the monitoring function hourly
+
+## Live Demo
+
+Visit the live dashboard: [https://pipeguard.uc.r.appspot.com/](https://pipeguard.uc.r.appspot.com/)
+
+## Setup Instructions
+
+### Prerequisites
+
+- GitHub account with a repository using GitHub Actions
+- Google Cloud Platform account
+- Python 3.9+
 
 PipeGuard is a DevOps tool that monitors a GitHub Actions pipeline, detects anomalies (like long build times or test failures), and displays insights via a Flask dashboard on Google App Engine.
 
