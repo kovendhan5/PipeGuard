@@ -1,9 +1,13 @@
 # filepath: k:\Devops\PipeGuard\monitor_pipeline.py
 import os
 import requests
+import logging
 from google.cloud import firestore
 from datetime import datetime
 from dotenv import load_dotenv
+
+# Configure secure logging
+logger = logging.getLogger(__name__)
 
 # Load environment variables from .env file
 load_dotenv()
@@ -13,11 +17,13 @@ def monitor_pipeline(request):
         # Get GitHub token from environment variables (properly sanitized)
         GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN", "")
         if not GITHUB_TOKEN:
+            logger.error("GitHub token not found in environment variables")
             return "Error: GitHub token not found in environment variables"
         
         # Convert to string and remove any whitespace or invisible characters that might cause API issues
         GITHUB_TOKEN = str(GITHUB_TOKEN).strip()
-        print(f"Token found, first 5 chars: {GITHUB_TOKEN[:5]}...")
+        # Security: Never log the actual token, only confirm it exists
+        logger.info("GitHub token found and configured")
         
         GITHUB_USER = os.environ.get("GITHUB_USER", "kovendhan5")
         GITHUB_REPO = os.environ.get("GITHUB_REPO", "PipeGuard")

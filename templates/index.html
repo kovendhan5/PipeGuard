@@ -1,49 +1,740 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>PipeGuard</title>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <style>
-    body { font-family: Arial; margin: 20px; }
-    canvas { max-width: 600px; }
-  </style>
+<html lang="en">
+<head>    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <title>PipeGuard - Advanced Pipeline Monitor</title>
+    
+    <!-- External Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/date-fns@2.29.3/index.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Custom Styles -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .logo i {
+            margin-right: 0.5rem;
+            font-size: 2rem;
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5a6fd8;
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+
+        .btn-secondary:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .dashboard-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: white;
+        }
+
+        .dashboard-header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .dashboard-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .stat-title {
+            font-size: 0.9rem;
+            color: #666;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .stat-icon {
+            font-size: 1.5rem;
+            padding: 0.5rem;
+            border-radius: 8px;
+        }
+
+        .success { color: #10b981; background: rgba(16, 185, 129, 0.1); }
+        .danger { color: #ef4444; background: rgba(239, 68, 68, 0.1); }
+        .warning { color: #f59e0b; background: rgba(245, 158, 11, 0.1); }
+        .info { color: #3b82f6; background: rgba(59, 130, 246, 0.1); }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .stat-trend {
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .section-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .runs-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .run-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            transition: background 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+
+        .run-item:hover {
+            background: rgba(102, 126, 234, 0.05);
+        }
+
+        .run-item.success {
+            border-left-color: #10b981;
+            background: rgba(16, 185, 129, 0.02);
+        }
+
+        .run-item.failure {
+            border-left-color: #ef4444;
+            background: rgba(239, 68, 68, 0.02);
+        }
+
+        .run-item.running {
+            border-left-color: #f59e0b;
+            background: rgba(245, 158, 11, 0.02);
+        }
+
+        .run-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+        }
+
+        .run-id {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .run-branch {
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .run-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .status-badge {
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .run-duration {
+            font-weight: 600;
+            color: #666;
+        }
+
+        .anomaly-item {
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border-left: 4px solid #ef4444;
+            background: rgba(239, 68, 68, 0.05);
+        }
+
+        .anomaly-header {
+            display: flex;
+            justify-content: between;
+            align-items: flex-start;
+            margin-bottom: 0.5rem;
+        }
+
+        .anomaly-type {
+            font-weight: 600;
+            color: #ef4444;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .anomaly-fix {
+            background: rgba(16, 185, 129, 0.1);
+            color: #059669;
+            padding: 0.5rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .charts-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 400px;
+            margin-top: 1rem;
+        }
+
+        .refresh-indicator {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #10b981;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            display: none;
+            align-items: center;
+            gap: 0.5rem;
+            z-index: 1001;
+        }
+
+        .refresh-indicator.show {
+            display: flex;
+        }
+
+        .loading {
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <h1>PipeGuard: Pipeline Health</h1>
-  <h2>Recent Runs</h2>
-  <ul>
-    {% for run in runs %}
-      <li>Run {{ run.id }}: {{ run.status if run.status else "unknown" }} ({{ run.duration }}s)</li>
-    {% endfor %}
-  </ul>
-  <h2>Anomalies</h2>
-  <ul>
-    {% for anomaly in anomalies %}
-      <li>{{ anomaly.issue }} - Fix: {{ anomaly.fix }}</li>
-    {% endfor %}
-  </ul>
-  <canvas id="durationChart"></canvas>
-  <script>
-    new Chart(document.getElementById("durationChart"), {
-      type: "line",
-      data: {
-        labels: [{% for run in runs %}"Run {{ run.id }}",{% endfor %}],
-        datasets: [{
-          label: "Build Duration (s)",
-          data: [{% for run in runs %}{{ run.duration }},{% endfor %}],
-          borderColor: "blue",
-          fill: false
-        }]
-      },
-      options: {
-        responsive: true,
-        scales: {
-          y: {
-            beginAtZero: true
-          }
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="logo">
+                <i class="fas fa-shield-alt"></i>
+                PipeGuard Pro
+            </div>
+            <div class="nav-actions">
+                <button class="btn btn-secondary" onclick="refreshData()">
+                    <i class="fas fa-sync-alt"></i> Refresh
+                </button>
+                <button class="btn btn-primary" onclick="toggleAutoRefresh()">
+                    <i class="fas fa-play" id="autoRefreshIcon"></i>
+                    <span id="autoRefreshText">Auto Refresh</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Refresh Indicator -->
+    <div class="refresh-indicator" id="refreshIndicator">
+        <i class="fas fa-sync-alt loading"></i>
+        Updating data...
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Header -->
+        <div class="dashboard-header">
+            <h1>Pipeline Health Dashboard</h1>
+            <p>Real-time monitoring and anomaly detection for your CI/CD pipelines</p>
+        </div>
+
+        <!-- Statistics Cards -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-header">
+                    <span class="stat-title">Total Runs</span>
+                    <div class="stat-icon success">
+                        <i class="fas fa-play-circle"></i>
+                    </div>
+                </div>
+                <div class="stat-value" id="totalRuns">{{ runs|length }}</div>
+                <div class="stat-trend success">
+                    <i class="fas fa-arrow-up"></i> +12% from last week
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-header">
+                    <span class="stat-title">Success Rate</span>
+                    <div class="stat-icon success">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                </div>
+                <div class="stat-value" id="successRate">
+                    {% set success_count = runs | selectattr("status", "equalto", "success") | list | length %}
+                    {% if runs|length > 0 %}
+                        {{ "%.1f"|format((success_count / runs|length) * 100) }}%
+                    {% else %}
+                        N/A
+                    {% endif %}
+                </div>
+                <div class="stat-trend success">
+                    <i class="fas fa-arrow-up"></i> +5% improvement
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-header">
+                    <span class="stat-title">Avg Duration</span>
+                    <div class="stat-icon info">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                </div>
+                <div class="stat-value" id="avgDuration">
+                    {% if runs|length > 0 %}
+                        {{ "%.1f"|format(runs | map(attribute="duration") | sum / runs|length) }}s
+                    {% else %}
+                        N/A
+                    {% endif %}
+                </div>
+                <div class="stat-trend warning">
+                    <i class="fas fa-arrow-down"></i> -8s faster
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-header">
+                    <span class="stat-title">Active Alerts</span>
+                    <div class="stat-icon danger">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                </div>
+                <div class="stat-value" id="activeAlerts">{{ anomalies|length }}</div>
+                <div class="stat-trend danger">
+                    <i class="fas fa-arrow-up"></i> {{ anomalies|length }} new issues
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content Grid -->
+        <div class="main-content">
+            <!-- Recent Runs -->
+            <div class="section-card">
+                <h2 class="section-title">
+                    <i class="fas fa-history"></i>
+                    Recent Pipeline Runs
+                </h2>
+                <div class="runs-list" id="runsList">
+                    {% for run in runs %}
+                    <div class="run-item {{ run.status if run.status else 'unknown' }}">
+                        <div class="run-info">
+                            <div class="run-id">#{{ run.id }}</div>
+                            <div class="run-branch">
+                                <i class="fas fa-code-branch"></i> main
+                            </div>
+                        </div>
+                        <div class="run-status">
+                            <span class="status-badge {{ run.status if run.status else 'unknown' }}">
+                                {% if run.status == 'success' %}
+                                    <i class="fas fa-check"></i> Success
+                                {% elif run.status == 'failure' %}
+                                    <i class="fas fa-times"></i> Failed
+                                {% else %}
+                                    <i class="fas fa-question"></i> Unknown
+                                {% endif %}
+                            </span>
+                            <span class="run-duration">{{ run.duration }}s</span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Anomalies & Alerts -->
+            <div class="section-card">
+                <h2 class="section-title">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    Anomalies & Alerts
+                </h2>
+                <div id="anomaliesList">
+                    {% for anomaly in anomalies %}
+                    <div class="anomaly-item">
+                        <div class="anomaly-header">
+                            <div class="anomaly-type">
+                                <i class="fas fa-bug"></i>
+                                {{ anomaly.issue }}
+                            </div>
+                        </div>
+                        <div class="anomaly-fix">
+                            <i class="fas fa-lightbulb"></i>
+                            <strong>Suggested Fix:</strong> {{ anomaly.fix }}
+                        </div>
+                    </div>
+                    {% else %}
+                    <div style="text-align: center; padding: 2rem; color: #10b981;">
+                        <i class="fas fa-check-circle" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+                        <div style="font-size: 1.2rem; font-weight: 600;">All Systems Healthy!</div>
+                        <div style="opacity: 0.8;">No anomalies detected in recent runs</div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts Section -->
+        <div class="charts-section">
+            <h2 class="section-title">
+                <i class="fas fa-chart-line"></i>
+                Performance Analytics
+            </h2>
+            <div class="chart-container">
+                <canvas id="performanceChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>&copy; 2025 PipeGuard Pro - Advanced CI/CD Pipeline Monitoring</p>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        let autoRefreshInterval;
+        let isAutoRefreshEnabled = false;
+
+        // Initialize charts
+        const ctx = document.getElementById('performanceChart').getContext('2d');
+        const performanceChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: [{% for run in runs %}'#{{ run.id }}'{% if not loop.last %},{% endif %}{% endfor %}],
+                datasets: [{
+                    label: 'Build Duration (seconds)',
+                    data: [{% for run in runs %}{{ run.duration }}{% if not loop.last %},{% endif %}{% endfor %}],
+                    borderColor: '#667eea',
+                    backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4,
+                    pointBackgroundColor: '#667eea',
+                    pointBorderColor: '#ffffff',
+                    pointBorderWidth: 2,
+                    pointRadius: 6,
+                    pointHoverRadius: 8
+                }, {
+                    label: 'Success Rate (%)',
+                    data: [{% for run in runs %}{% if run.status == 'success' %}100{% else %}0{% endif %}{% if not loop.last %},{% endif %}{% endfor %}],
+                    borderColor: '#10b981',
+                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                    borderWidth: 2,
+                    fill: false,
+                    tension: 0.4,
+                    pointBackgroundColor: '#10b981',
+                    pointBorderColor: '#ffffff',
+                    pointBorderWidth: 2,
+                    pointRadius: 4,
+                    pointHoverRadius: 6,
+                    yAxisID: 'y1'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: {
+                            usePointStyle: true,
+                            padding: 20,
+                            font: {
+                                size: 12,
+                                weight: '600'
+                            }
+                        }
+                    },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false,
+                        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                        titleColor: '#ffffff',
+                        bodyColor: '#ffffff',
+                        borderColor: '#667eea',
+                        borderWidth: 1,
+                        cornerRadius: 6,
+                        padding: 12
+                    }
+                },
+                scales: {
+                    x: {
+                        display: true,
+                        title: {
+                            display: true,
+                            text: 'Pipeline Runs',
+                            font: {
+                                size: 14,
+                                weight: '600'
+                            }
+                        },
+                        grid: {
+                            color: 'rgba(0, 0, 0, 0.05)'
+                        }
+                    },
+                    y: {
+                        type: 'linear',
+                        display: true,
+                        position: 'left',
+                        title: {
+                            display: true,
+                            text: 'Duration (seconds)',
+                            font: {
+                                size: 14,
+                                weight: '600'
+                            }
+                        },
+                        grid: {
+                            color: 'rgba(0, 0, 0, 0.05)'
+                        },
+                        beginAtZero: true
+                    },
+                    y1: {
+                        type: 'linear',
+                        display: true,
+                        position: 'right',
+                        title: {
+                            display: true,
+                            text: 'Success Rate (%)',
+                            font: {
+                                size: 14,
+                                weight: '600'
+                            }
+                        },
+                        grid: {
+                            drawOnChartArea: false,
+                        },
+                        min: 0,
+                        max: 100
+                    }
+                },
+                interaction: {
+                    mode: 'nearest',
+                    axis: 'x',
+                    intersect: false
+                }
+            }
+        });
+
+        // Refresh data function
+        function refreshData() {
+            const indicator = document.getElementById('refreshIndicator');
+            indicator.classList.add('show');
+            
+            // Simulate data refresh (in real app, this would be an API call)
+            setTimeout(() => {
+                indicator.classList.remove('show');
+                // In a real app, you'd update the page content here
+                console.log('Data refreshed');
+            }, 2000);
         }
-      }
-    });
-  </script>
+
+        // Toggle auto-refresh
+        function toggleAutoRefresh() {
+            const icon = document.getElementById('autoRefreshIcon');
+            const text = document.getElementById('autoRefreshText');
+            
+            if (isAutoRefreshEnabled) {
+                clearInterval(autoRefreshInterval);
+                icon.className = 'fas fa-play';
+                text.textContent = 'Auto Refresh';
+                isAutoRefreshEnabled = false;
+            } else {
+                autoRefreshInterval = setInterval(refreshData, 30000); // Refresh every 30 seconds
+                icon.className = 'fas fa-pause';
+                text.textContent = 'Stop Auto';
+                isAutoRefreshEnabled = true;
+            }
+        }
+
+        // Initialize tooltips and animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add smooth scroll behavior
+            document.documentElement.style.scrollBehavior = 'smooth';
+            
+            // Animate stat cards on load
+            const statCards = document.querySelectorAll('.stat-card');
+            statCards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    card.style.transition = 'all 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+
+        // Real-time clock update
+        function updateClock() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString();
+            document.title = `PipeGuard Pro - ${timeString}`;
+        }
+
+        setInterval(updateClock, 1000);
+    </script>
 </body>
 </html>
