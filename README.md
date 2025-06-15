@@ -2,6 +2,33 @@
 
 PipeGuard is a monitoring system for GitHub Actions pipelines that detects anomalies and provides suggestions for fixes. The project demonstrates DevOps skills by integrating multiple Google Cloud services with a GitHub workflow.
 
+## Quick Start (Local Development)
+
+### Option 1: Windows Batch Script (Easiest)
+1. Double-click `setup_and_run.bat`
+2. Choose option 1 to run the Flask app locally
+3. Visit http://localhost:8080 to see the dashboard
+
+### Option 2: Manual Setup
+1. Install dependencies: `pip install -r requirements.txt`
+2. Run locally: `python run_local.py`
+3. Visit http://localhost:8080
+
+### Option 3: Test the Application
+Run tests to verify everything works:
+```bash
+python -m pytest test_app.py -v
+```
+
+## Configuration for Production
+
+1. Copy `.env.example` to `.env`
+2. Fill in your actual credentials:
+   - `GITHUB_TOKEN`: GitHub personal access token with repo:status scope
+   - `GITHUB_USER`: Your GitHub username
+   - `GITHUB_REPO`: Repository name to monitor
+   - `GOOGLE_CLOUD_PROJECT`: Your Google Cloud project ID
+
 ## Features
 
 - Real-time monitoring of GitHub Actions pipeline runs

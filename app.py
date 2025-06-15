@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-from google.cloud import datastore
+from google.cloud import firestore
 import os
 from dotenv import load_dotenv
 import logging
@@ -16,20 +16,20 @@ app = Flask(__name__)
 @app.route("/")
 def dashboard():
     try:
-        logger.info("Attempting to connect to Datastore...")
-        # Use datastore client instead of firestore since project is in Datastore mode
-        db = datastore.Client()
+        logger.info("Attempting to connect to Firestore...")
+        # Use firestore client for consistent database access
+        db = firestore.Client()
         
-        logger.info("Fetching runs from Datastore...")
-        query = db.query(kind="runs")
-        query.order = ["-timestamp"]
-        runs = list(query.fetch(limit=10))
-        run_data = [dict(r) for r in runs]
-        logger.info(f"Retrieved {len(run_data)} runs from Datastore")
+        logger.info("Fetching runs from Firestore...")
+        runs_ref = db.collection("runs").order_by("timestamp", direction=firestore.Query.DESCENDING).limit(10)
+        runs = runs_ref.get()
+        run_data = [doc.to_dict() for doc in runs]
+        logger.info(f"Retrieved {len(run_data)} runs from Firestore")
         
         logger.info("Fetching anomalies from Firestore...")
-        anomalies = db.collection("anomalies").order_by("run_id", direction=firestore.Query.DESCENDING).limit(5).get()
-        anomaly_data = [a.to_dict() for a in anomalies]
+        anomalies_ref = db.collection("anomalies").order_by("run_id", direction=firestore.Query.DESCENDING).limit(5)
+        anomalies = anomalies_ref.get()
+        anomaly_data = [doc.to_dict() for doc in anomalies]
         logger.info(f"Retrieved {len(anomaly_data)} anomalies from Firestore")
         
         return render_template("index.html",
