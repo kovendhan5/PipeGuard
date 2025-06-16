@@ -71,3 +71,148 @@
 2025-06-16 18:57:43,951 - flask-limiter - INFO - ratelimit 30 per 1 minute (127.0.0.1) exceeded at endpoint: dashboard
 2025-06-16 18:57:43,952 - app - WARNING - Rate limit exceeded: 127.0.0.1 - http://localhost/
 2025-06-16 18:57:43,967 - app - INFO - Page not found: 127.0.0.1 - http://localhost/nonexistent
+2025-06-16 18:59:39,640 - app - INFO - Dashboard access from 127.0.0.1
+2025-06-16 18:59:39,640 - app - ERROR - Error in dashboard: File k:\Devops\PipeGuard-1\credentials\service-account-key.json was not found.
+2025-06-16 18:59:39,648 - app - INFO - Dashboard access from 127.0.0.1
+2025-06-16 18:59:39,648 - app - ERROR - Error in dashboard: File k:\Devops\PipeGuard-1\credentials\service-account-key.json was not found.
+2025-06-16 18:59:39,653 - app - INFO - Dashboard access from 127.0.0.1
+2025-06-16 18:59:39,654 - app - ERROR - Error in dashboard: File k:\Devops\PipeGuard-1\credentials\service-account-key.json was not found.
+2025-06-16 18:59:39,655 - app - INFO - Dashboard access from 127.0.0.1
+2025-06-16 18:59:39,655 - app - ERROR - Error in dashboard: File k:\Devops\PipeGuard-1\credentials\service-account-key.json was not found.
+2025-06-16 18:59:39,656 - app - INFO - Dashboard access from 127.0.0.1
+2025-06-16 18:59:39,656 - app - ERROR - Error in dashboard: File k:\Devops\PipeGuard-1\credentials\service-account-key.json was not found.
+2025-06-16 18:59:39,657 - app - INFO - Dashboard access from 127.0.0.1
+2025-06-16 18:59:39,657 - app - ERROR - Error in dashboard: File k:\Devops\PipeGuard-1\credentials\service-account-key.json was not found.
+2025-06-16 18:59:39,658 - app - INFO - Dashboard access from 127.0.0.1
+2025-06-16 18:59:39,658 - app - ERROR - Error in dashboard: File k:\Devops\PipeGuard-1\credentials\service-account-key.json was not found.
+2025-06-16 18:59:39,660 - app - INFO - Dashboard access from 127.0.0.1
+2025-06-16 18:59:39,660 - app - ERROR - Error in dashboard: File k:\Devops\PipeGuard-1\credentials\service-account-key.json was not found.
+2025-06-16 18:59:39,661 - app - INFO - Dashboard access from 127.0.0.1
+2025-06-16 18:59:39,661 - app - ERROR - Error in dashboard: File k:\Devops\PipeGuard-1\credentials\service-account-key.json was not found.
+2025-06-16 18:59:39,662 - app - INFO - Dashboard access from 127.0.0.1
+2025-06-16 18:59:39,662 - app - ERROR - Error in dashboard: File k:\Devops\PipeGuard-1\credentials\service-account-key.json was not found.
+2025-06-16 18:59:39,663 - app - INFO - Dashboard access from 127.0.0.1
+2025-06-16 18:59:39,663 - app - ERROR - Error in dashboard: File k:\Devops\PipeGuard-1\credentials\service-account-key.json was not found.
+2025-06-16 18:59:39,663 - app - INFO - Dashboard access from 127.0.0.1
+2025-06-16 18:59:39,664 - app - ERROR - Error in dashboard: File k:\Devops\PipeGuard-1\credentials\service-account-key.json was not found.
+2025-06-16 18:59:39,664 - app - INFO - Dashboard access from 127.0.0.1
+2025-06-16 18:59:39,664 - app - ERROR - Error in dashboard: File k:\Devops\PipeGuard-1\credentials\service-account-key.json was not found.
+2025-06-16 18:59:39,666 - app - INFO - Dashboard access from 127.0.0.1
+2025-06-16 18:59:39,666 - app - ERROR - Error in dashboard: File k:\Devops\PipeGuard-1\credentials\service-account-key.json was not found.
+2025-06-16 18:59:39,666 - app - INFO - Dashboard access from 127.0.0.1
+2025-06-16 18:59:39,666 - app - ERROR - Error in dashboard: File k:\Devops\PipeGuard-1\credentials\service-account-key.json was not found.
+2025-06-16 18:59:39,668 - app - INFO - Dashboard access from 127.0.0.1
+2025-06-16 18:59:39,668 - app - ERROR - Error in dashboard: File k:\Devops\PipeGuard-1\credentials\service-account-key.json was not found.
+2025-06-16 18:59:39,669 - app - INFO - Dashboard access from 127.0.0.1
+2025-06-16 18:59:39,669 - app - ERROR - Error in dashboard: File k:\Devops\PipeGuard-1\credentials\service-account-key.json was not found.
+2025-06-16 18:59:39,670 - app - INFO - Dashboard access from 127.0.0.1
+2025-06-16 18:59:39,670 - app - ERROR - Error in dashboard: File k:\Devops\PipeGuard-1\credentials\service-account-key.json was not found.
+2025-06-16 18:59:39,671 - app - INFO - Dashboard access from 127.0.0.1
+2025-06-16 18:59:39,672 - app - ERROR - Error in dashboard: File k:\Devops\PipeGuard-1\credentials\service-account-key.json was not found.
+2025-06-16 18:59:39,673 - app - INFO - Dashboard access from 127.0.0.1
+2025-06-16 18:59:39,673 - app - ERROR - Error in dashboard: File k:\Devops\PipeGuard-1\credentials\service-account-key.json was not found.
+2025-06-16 18:59:39,674 - app - INFO - Dashboard access from 127.0.0.1
+2025-06-16 18:59:39,674 - app - ERROR - Error in dashboard: File k:\Devops\PipeGuard-1\credentials\service-account-key.json was not found.
+2025-06-16 18:59:39,675 - app - INFO - Dashboard access from 127.0.0.1
+2025-06-16 18:59:39,675 - app - ERROR - Error in dashboard: File k:\Devops\PipeGuard-1\credentials\service-account-key.json was not found.
+2025-06-16 18:59:39,676 - app - INFO - Dashboard access from 127.0.0.1
+2025-06-16 18:59:39,676 - app - ERROR - Error in dashboard: File k:\Devops\PipeGuard-1\credentials\service-account-key.json was not found.
+2025-06-16 18:59:39,677 - app - INFO - Dashboard access from 127.0.0.1
+2025-06-16 18:59:39,678 - app - ERROR - Error in dashboard: File k:\Devops\PipeGuard-1\credentials\service-account-key.json was not found.
+2025-06-16 18:59:39,679 - app - INFO - Dashboard access from 127.0.0.1
+2025-06-16 18:59:39,679 - app - ERROR - Error in dashboard: File k:\Devops\PipeGuard-1\credentials\service-account-key.json was not found.
+2025-06-16 18:59:39,680 - app - INFO - Dashboard access from 127.0.0.1
+2025-06-16 18:59:39,680 - app - ERROR - Error in dashboard: File k:\Devops\PipeGuard-1\credentials\service-account-key.json was not found.
+2025-06-16 18:59:39,681 - app - INFO - Dashboard access from 127.0.0.1
+2025-06-16 18:59:39,681 - app - ERROR - Error in dashboard: File k:\Devops\PipeGuard-1\credentials\service-account-key.json was not found.
+2025-06-16 18:59:39,682 - app - INFO - Dashboard access from 127.0.0.1
+2025-06-16 18:59:39,682 - app - ERROR - Error in dashboard: File k:\Devops\PipeGuard-1\credentials\service-account-key.json was not found.
+2025-06-16 18:59:39,682 - app - INFO - Dashboard access from 127.0.0.1
+2025-06-16 18:59:39,682 - app - ERROR - Error in dashboard: File k:\Devops\PipeGuard-1\credentials\service-account-key.json was not found.
+2025-06-16 18:59:39,684 - app - INFO - Dashboard access from 127.0.0.1
+2025-06-16 18:59:39,684 - app - ERROR - Error in dashboard: File k:\Devops\PipeGuard-1\credentials\service-account-key.json was not found.
+2025-06-16 18:59:39,685 - flask-limiter - INFO - ratelimit 30 per 1 minute (127.0.0.1) exceeded at endpoint: dashboard
+2025-06-16 18:59:39,685 - app - WARNING - Rate limit exceeded: 127.0.0.1 - http://localhost/
+2025-06-16 18:59:39,685 - flask-limiter - INFO - ratelimit 30 per 1 minute (127.0.0.1) exceeded at endpoint: dashboard
+2025-06-16 18:59:39,686 - app - WARNING - Rate limit exceeded: 127.0.0.1 - http://localhost/
+2025-06-16 18:59:39,686 - flask-limiter - INFO - ratelimit 30 per 1 minute (127.0.0.1) exceeded at endpoint: dashboard
+2025-06-16 18:59:39,686 - app - WARNING - Rate limit exceeded: 127.0.0.1 - http://localhost/
+2025-06-16 18:59:39,687 - flask-limiter - INFO - ratelimit 30 per 1 minute (127.0.0.1) exceeded at endpoint: dashboard
+2025-06-16 18:59:39,687 - app - WARNING - Rate limit exceeded: 127.0.0.1 - http://localhost/
+2025-06-16 18:59:39,687 - flask-limiter - INFO - ratelimit 30 per 1 minute (127.0.0.1) exceeded at endpoint: dashboard
+2025-06-16 18:59:39,688 - app - WARNING - Rate limit exceeded: 127.0.0.1 - http://localhost/
+2025-06-16 18:59:39,688 - flask-limiter - INFO - ratelimit 30 per 1 minute (127.0.0.1) exceeded at endpoint: dashboard
+2025-06-16 18:59:39,688 - app - WARNING - Rate limit exceeded: 127.0.0.1 - http://localhost/
+2025-06-16 19:00:54,456 - app - INFO - Dashboard access from 127.0.0.1
+2025-06-16 19:00:54,458 - app - ERROR - Error in dashboard: File k:\Devops\PipeGuard-1\credentials\service-account-key.json was not found.
+2025-06-16 19:00:54,506 - app - INFO - Dashboard access from 127.0.0.1
+2025-06-16 19:00:54,516 - app - ERROR - Error in dashboard: File k:\Devops\PipeGuard-1\credentials\service-account-key.json was not found.
+2025-06-16 19:00:54,516 - app - INFO - Dashboard access from 127.0.0.1
+2025-06-16 19:00:54,516 - app - ERROR - Error in dashboard: File k:\Devops\PipeGuard-1\credentials\service-account-key.json was not found.
+2025-06-16 19:00:54,516 - app - INFO - Dashboard access from 127.0.0.1
+2025-06-16 19:00:54,516 - app - ERROR - Error in dashboard: File k:\Devops\PipeGuard-1\credentials\service-account-key.json was not found.
+2025-06-16 19:00:54,519 - app - INFO - Dashboard access from 127.0.0.1
+2025-06-16 19:00:54,519 - app - ERROR - Error in dashboard: File k:\Devops\PipeGuard-1\credentials\service-account-key.json was not found.
+2025-06-16 19:00:54,519 - app - INFO - Dashboard access from 127.0.0.1
+2025-06-16 19:00:54,519 - app - ERROR - Error in dashboard: File k:\Devops\PipeGuard-1\credentials\service-account-key.json was not found.
+2025-06-16 19:00:54,521 - app - INFO - Dashboard access from 127.0.0.1
+2025-06-16 19:00:54,521 - app - ERROR - Error in dashboard: File k:\Devops\PipeGuard-1\credentials\service-account-key.json was not found.
+2025-06-16 19:00:54,522 - app - INFO - Dashboard access from 127.0.0.1
+2025-06-16 19:00:54,523 - app - ERROR - Error in dashboard: File k:\Devops\PipeGuard-1\credentials\service-account-key.json was not found.
+2025-06-16 19:00:54,524 - app - INFO - Dashboard access from 127.0.0.1
+2025-06-16 19:00:54,524 - app - ERROR - Error in dashboard: File k:\Devops\PipeGuard-1\credentials\service-account-key.json was not found.
+2025-06-16 19:00:54,524 - app - INFO - Dashboard access from 127.0.0.1
+2025-06-16 19:00:54,524 - app - ERROR - Error in dashboard: File k:\Devops\PipeGuard-1\credentials\service-account-key.json was not found.
+2025-06-16 19:00:54,525 - app - INFO - Dashboard access from 127.0.0.1
+2025-06-16 19:00:54,525 - app - ERROR - Error in dashboard: File k:\Devops\PipeGuard-1\credentials\service-account-key.json was not found.
+2025-06-16 19:00:54,525 - app - INFO - Dashboard access from 127.0.0.1
+2025-06-16 19:00:54,525 - app - ERROR - Error in dashboard: File k:\Devops\PipeGuard-1\credentials\service-account-key.json was not found.
+2025-06-16 19:00:54,525 - app - INFO - Dashboard access from 127.0.0.1
+2025-06-16 19:00:54,525 - app - ERROR - Error in dashboard: File k:\Devops\PipeGuard-1\credentials\service-account-key.json was not found.
+2025-06-16 19:00:54,529 - app - INFO - Dashboard access from 127.0.0.1
+2025-06-16 19:00:54,529 - app - ERROR - Error in dashboard: File k:\Devops\PipeGuard-1\credentials\service-account-key.json was not found.
+2025-06-16 19:00:54,529 - app - INFO - Dashboard access from 127.0.0.1
+2025-06-16 19:00:54,530 - app - ERROR - Error in dashboard: File k:\Devops\PipeGuard-1\credentials\service-account-key.json was not found.
+2025-06-16 19:00:54,530 - app - INFO - Dashboard access from 127.0.0.1
+2025-06-16 19:00:54,530 - app - ERROR - Error in dashboard: File k:\Devops\PipeGuard-1\credentials\service-account-key.json was not found.
+2025-06-16 19:00:54,531 - app - INFO - Dashboard access from 127.0.0.1
+2025-06-16 19:00:54,531 - app - ERROR - Error in dashboard: File k:\Devops\PipeGuard-1\credentials\service-account-key.json was not found.
+2025-06-16 19:00:54,532 - app - INFO - Dashboard access from 127.0.0.1
+2025-06-16 19:00:54,532 - app - ERROR - Error in dashboard: File k:\Devops\PipeGuard-1\credentials\service-account-key.json was not found.
+2025-06-16 19:00:54,533 - app - INFO - Dashboard access from 127.0.0.1
+2025-06-16 19:00:54,533 - app - ERROR - Error in dashboard: File k:\Devops\PipeGuard-1\credentials\service-account-key.json was not found.
+2025-06-16 19:00:54,534 - app - INFO - Dashboard access from 127.0.0.1
+2025-06-16 19:00:54,534 - app - ERROR - Error in dashboard: File k:\Devops\PipeGuard-1\credentials\service-account-key.json was not found.
+2025-06-16 19:00:54,534 - app - INFO - Dashboard access from 127.0.0.1
+2025-06-16 19:00:54,534 - app - ERROR - Error in dashboard: File k:\Devops\PipeGuard-1\credentials\service-account-key.json was not found.
+2025-06-16 19:00:54,536 - app - INFO - Dashboard access from 127.0.0.1
+2025-06-16 19:00:54,536 - app - ERROR - Error in dashboard: File k:\Devops\PipeGuard-1\credentials\service-account-key.json was not found.
+2025-06-16 19:00:54,537 - app - INFO - Dashboard access from 127.0.0.1
+2025-06-16 19:00:54,537 - app - ERROR - Error in dashboard: File k:\Devops\PipeGuard-1\credentials\service-account-key.json was not found.
+2025-06-16 19:00:54,538 - app - INFO - Dashboard access from 127.0.0.1
+2025-06-16 19:00:54,538 - app - ERROR - Error in dashboard: File k:\Devops\PipeGuard-1\credentials\service-account-key.json was not found.
+2025-06-16 19:00:54,539 - app - INFO - Dashboard access from 127.0.0.1
+2025-06-16 19:00:54,540 - app - ERROR - Error in dashboard: File k:\Devops\PipeGuard-1\credentials\service-account-key.json was not found.
+2025-06-16 19:00:54,540 - app - INFO - Dashboard access from 127.0.0.1
+2025-06-16 19:00:54,540 - app - ERROR - Error in dashboard: File k:\Devops\PipeGuard-1\credentials\service-account-key.json was not found.
+2025-06-16 19:00:54,540 - app - INFO - Dashboard access from 127.0.0.1
+2025-06-16 19:00:54,541 - app - ERROR - Error in dashboard: File k:\Devops\PipeGuard-1\credentials\service-account-key.json was not found.
+2025-06-16 19:00:54,541 - app - INFO - Dashboard access from 127.0.0.1
+2025-06-16 19:00:54,541 - app - ERROR - Error in dashboard: File k:\Devops\PipeGuard-1\credentials\service-account-key.json was not found.
+2025-06-16 19:00:54,542 - app - INFO - Dashboard access from 127.0.0.1
+2025-06-16 19:00:54,542 - app - ERROR - Error in dashboard: File k:\Devops\PipeGuard-1\credentials\service-account-key.json was not found.
+2025-06-16 19:00:54,543 - app - INFO - Dashboard access from 127.0.0.1
+2025-06-16 19:00:54,543 - app - ERROR - Error in dashboard: File k:\Devops\PipeGuard-1\credentials\service-account-key.json was not found.
+2025-06-16 19:00:54,543 - flask-limiter - INFO - ratelimit 30 per 1 minute (127.0.0.1) exceeded at endpoint: dashboard
+2025-06-16 19:00:54,543 - app - WARNING - Rate limit exceeded: 127.0.0.1 - http://localhost/
+2025-06-16 19:00:54,545 - flask-limiter - INFO - ratelimit 30 per 1 minute (127.0.0.1) exceeded at endpoint: dashboard
+2025-06-16 19:00:54,545 - app - WARNING - Rate limit exceeded: 127.0.0.1 - http://localhost/
+2025-06-16 19:00:54,545 - flask-limiter - INFO - ratelimit 30 per 1 minute (127.0.0.1) exceeded at endpoint: dashboard
+2025-06-16 19:00:54,545 - app - WARNING - Rate limit exceeded: 127.0.0.1 - http://localhost/
+2025-06-16 19:00:54,545 - flask-limiter - INFO - ratelimit 30 per 1 minute (127.0.0.1) exceeded at endpoint: dashboard
+2025-06-16 19:00:54,545 - app - WARNING - Rate limit exceeded: 127.0.0.1 - http://localhost/
+2025-06-16 19:00:54,545 - flask-limiter - INFO - ratelimit 30 per 1 minute (127.0.0.1) exceeded at endpoint: dashboard
+2025-06-16 19:00:54,545 - app - WARNING - Rate limit exceeded: 127.0.0.1 - http://localhost/
+2025-06-16 19:00:54,545 - flask-limiter - INFO - ratelimit 30 per 1 minute (127.0.0.1) exceeded at endpoint: dashboard
+2025-06-16 19:00:54,545 - app - WARNING - Rate limit exceeded: 127.0.0.1 - http://localhost/
+2025-06-16 19:00:54,559 - app - INFO - Page not found: 127.0.0.1 - http://localhost/nonexistent
