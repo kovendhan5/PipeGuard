@@ -238,4 +238,10 @@ MIT License - see LICENSE file for details.
 
 ---
 
+## 🧹 Project Cleanup
+
+See `CLEANUP_SUMMARY.md` for a detailed log of all removed files, obsolete scripts, and the current optimized project structure as of June 2025.
+
+---
+
 **⭐ PipeGuard** - Advanced Pipeline Monitoring with AI-Powered Analytics

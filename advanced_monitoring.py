@@ -6,8 +6,8 @@ Includes real-time notifications, performance analysis, and predictive insights.
 import os
 import json
 import smtplib
-from email.mime.text import MimeText
-from email.mime.multipart import MimeMultipart
+from email.mime.text import MIMEText as MimeText
+from email.mime.multipart import MIMEMultipart as MimeMultipart
 from datetime import datetime, timedelta
 from typing import List, Dict, Any
 import statistics
