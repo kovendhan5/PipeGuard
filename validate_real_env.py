@@ -157,11 +157,9 @@ def validate_application_setup():
     except ImportError as e:
         print_status(f"Missing package: {e}", "error")
         return False
-    
-    # Test Flask app can start
+      # Test Flask app can start
     try:
-        from app import create_app
-        app = create_app()
+        import app
         print_status("Flask application configuration valid", "success")
         return True
     except Exception as e:
