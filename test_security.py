@@ -224,7 +224,7 @@ Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
 - ✅ Session management security
 """
     
-    with open('SECURITY_REPORT.md', 'w', encoding='utf-8') as f:
+    with open('SECURITY_REPORT.md', 'w') as f:
         f.write(report)
     
     print("✅ Security report generated: SECURITY_REPORT.md")

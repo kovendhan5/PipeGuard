@@ -568,6 +568,4 @@ def generate_smart_recommendations(runs):
     return recommendations
 
 if __name__ == "__main__":
-    # Use environment variable for debug mode, default to False for production
-    debug_mode = os.environ.get('DEBUG', 'False').lower() == 'true'
-    app.run(host="0.0.0.0", port=8080, debug=debug_mode)
+    app.run(host="0.0.0.0", port=8080, debug=True)

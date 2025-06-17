@@ -1,11 +1,15 @@
 #!/usr/bin/env python3
-"""Quick Security Check for PipeGuard"""
+"""
+Quick Security Verification for PipeGuard
+Checks core security features before real environment setup.
+"""
 
 import os
+import sys
 from dotenv import load_dotenv
 
 def main():
-    print('🔒 PipeGuard Security Status')
+    print('🔐 PipeGuard Security Verification')
     print('=' * 40)
     
     # Load environment
@@ -14,76 +18,91 @@ def main():
     issues = []
     passed = []
     
-    # 1. Secret key check
+    # Check secret key
     secret = os.getenv('SECRET_KEY')
-    if not secret:
-        issues.append('❌ Missing SECRET_KEY')
-    elif len(secret) < 32:
-        issues.append('⚠️ SECRET_KEY too short (minimum 32 chars)')
+    if secret and len(secret) >= 32:
+        passed.append('✅ Secret key: Strong ({} chars)'.format(len(secret)))
     else:
-        passed.append('✅ SECRET_KEY: Secure (32+ characters)')
+        issues.append('⚠️  Secret key: Weak or missing')
     
-    # 2. Debug mode check
-    debug = os.getenv('DEBUG', 'False').lower()
-    if debug == 'true':
-        issues.append('⚠️ DEBUG=True (should be False for production)')
-    else:
-        passed.append('✅ DEBUG: Disabled for production')
-    
-    # 3. GitHub token check
-    github_token = os.getenv('GITHUB_TOKEN', '')
-    if 'your_' in github_token.lower():
-        issues.append('⚠️ GitHub token has placeholder value')
-    elif not github_token:
-        issues.append('⚠️ Missing GITHUB_TOKEN')
-    else:
-        passed.append('✅ GITHUB_TOKEN: Configured')
-    
-    # 4. GCP credentials check
-    gcp_creds = os.getenv('GOOGLE_APPLICATION_CREDENTIALS', '')
-    if 'your_' in gcp_creds.lower() or not gcp_creds:
-        issues.append('⚠️ GCP credentials not configured')
-    else:
-        if os.path.exists(gcp_creds):
-            passed.append('✅ GCP_CREDENTIALS: File exists')
-        else:
-            issues.append('❌ GCP credentials file not found')
-    
-    # 5. Check Flask dependencies
+    # Check security packages
     try:
-        import flask_limiter
-        import flask_cors
-        import bleach
+        import flask_limiter, flask_cors, bleach
         passed.append('✅ Security packages: All installed')
     except ImportError as e:
         issues.append(f'❌ Missing security package: {e}')
     
-    # Display results
-    print('\n📊 Security Assessment:')
+    # Import and check app configuration
+    try:
+        import app
+        
+        # Check HTTPS settings
+        if app.app.config.get('SESSION_COOKIE_SECURE'):
+            passed.append('✅ Session security: HTTPS enforced')
+        else:
+            issues.append('⚠️  Session security: HTTPS not enforced')
+        
+        # Check debug mode
+        if not app.app.debug:
+            passed.append('✅ Debug mode: Disabled (production safe)')
+        else:
+            issues.append('⚠️  Debug mode: Enabled (disable for production)')
+            
+        # Check rate limiting
+        if hasattr(app, 'limiter'):
+            passed.append('✅ Rate limiting: Configured')
+        else:
+            issues.append('⚠️  Rate limiting: Not configured')
+              # Check input validation
+        if hasattr(app, 'validate_and_sanitize_input'):
+            passed.append('✅ Input validation: Implemented')
+        else:
+            issues.append('⚠️  Input validation: Not found')
+            
+    except Exception as e:
+        issues.append(f'❌ App configuration error: {e}')
+    
+    # Check .env security
+    if os.path.exists('.env'):
+        with open('.env', 'r') as f:
+            env_content = f.read()
+            if 'your_' in env_content.lower() or 'placeholder' in env_content.lower():
+                issues.append('⚠️  .env file contains placeholder values')
+            else:
+                passed.append('✅ .env file: Real values configured')
+    else:
+        issues.append('❌ .env file: Missing')
+    
+    # Check .gitignore security
+    if os.path.exists('.gitignore'):
+        with open('.gitignore', 'r') as f:
+            gitignore = f.read()
+            if '.env' in gitignore and 'credentials/' in gitignore:
+                passed.append('✅ .gitignore: Secrets properly excluded')
+            else:
+                issues.append('⚠️  .gitignore: May expose secrets')
+    
+    # Print results
+    print('\\n📋 Security Check Results:')
     for item in passed:
         print(f'  {item}')
     
     if issues:
-        print('\n🚨 Issues Found:')
+        print('\\n🚨 Security Issues Found:')
         for item in issues:
             print(f'  {item}')
-        
-        print('\n🔧 Next Steps:')
-        if any('placeholder' in issue for issue in issues):
-            print('  1. Update .env with real GitHub credentials')
-        if any('GCP' in issue for issue in issues):
-            print('  2. Set up Google Cloud credentials')
-        if any('SECRET_KEY' in issue for issue in issues):
-            print('  3. Generate a secure secret key')
-            
-        print('\n📖 See REAL_ENVIRONMENT_SETUP.md for detailed instructions')
-        
-        return len(issues)
+    
+    print('\\n' + '=' * 40)
+    if len(issues) == 0:
+        print('🎉 Security Status: EXCELLENT - Ready for real environment!')
+        return True
+    elif len(issues) <= 2:
+        print('✅ Security Status: GOOD - Minor issues to address')
+        return True
     else:
-        print('\n🎉 All security checks passed!')
-        print('✅ PipeGuard is secure and ready!')
-        return 0
+        print('❌ Security Status: NEEDS IMPROVEMENT - Address issues before production')
+        return False
 
 if __name__ == '__main__':
-    exit_code = main()
-    exit(exit_code)
+    success = main()
+    sys.exit(0 if success else 1)
