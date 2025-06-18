@@ -15,17 +15,18 @@ PipeGuard is an advanced monitoring system for GitHub Actions pipelines that det
 
 ## 🎯 Quick Start (Local Development)
 
-### Option 1: Secure Setup (Recommended)
+### Option 1: Setup Wizard (Recommended for Real Environment)
+```bash
+python setup_wizard.py         # Interactive setup with real GitHub & Google Cloud
+```
+Follow the guided setup to connect to your actual repositories and services.
+
+### Option 2: Secure Setup (Development/Testing)
 ```bash
 python secure_setup.py     # Configure secure environment
 python run_local.py         # Choose option 1 to start dashboard
 ```
 Then visit: **http://localhost:8080**
-
-### Option 2: Windows Batch Script
-1. Double-click `setup_and_run.bat`
-2. Choose option 1 to run the Flask app locally
-3. Visit http://localhost:8080 to see the dashboard
 
 ### Option 3: Manual Setup
 ```bash
